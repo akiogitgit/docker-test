@@ -1,6 +1,10 @@
+# メインイメージを軽いnodeに
 FROM node:lts-buster-slim
 
+# cd
 WORKDIR /app
-COPY package.json /app/package.json
+
+# yarnでnode_modulesを作成する
+COPY package.json ./
+
 RUN yarn
-CMD [ "yarn","dev" ]
