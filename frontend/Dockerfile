@@ -2,7 +2,7 @@ FROM node:lts-buster-slim
 
 WORKDIR /app
 
-COPY package.json /app/package.json
+COPY package.json package.json
 
 RUN yarn
 
