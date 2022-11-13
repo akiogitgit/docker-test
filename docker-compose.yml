@@ -9,5 +9,18 @@ services:
     volumes:
       - ./frontend:/app # フォルダを同期
     environment:
-      - WATCHPACK_POLLING=true # ホットリロード
+      - WATCHPACK_POLLING=true # ホットリロード（同期に必要）
     entrypoint: "yarn dev"
+  db:
+    image: "mysql:latest"
+    ports: 
+      - 3001:3001
+    tty: true
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - mysql-db:/var/lib/mysql
+    depends_on:
+      - app
+volumes:
+  mysql-db:
