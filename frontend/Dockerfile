@@ -1,6 +1,9 @@
 # メインイメージを軽いnodeに
 FROM node:lts-buster-slim
 
+RUN apt-get update && apt-get install -y \
+  openssl
+
 # cd
 WORKDIR /app
 

@@ -11,16 +11,16 @@ services:
     environment:
       - WATCHPACK_POLLING=true # ホットリロード（同期に必要）
     entrypoint: "yarn dev"
+    depends_on: # db必須のフロント, dbコンテナが先に立つ
+      - db
   db:
     image: "mysql:latest"
-    ports: 
-      - 3001:3001
+    # ports: 
+    #   - 3001:3001 # 書かないと3306:3306
     tty: true
     environment:
       MYSQL_ROOT_PASSWORD: password
     volumes:
       - mysql-db:/var/lib/mysql
-    depends_on:
-      - app
 volumes:
   mysql-db:
