@@ -15,3 +15,9 @@ model Anpan {
   email String  @unique
   name  String?
 }
+
+model Anpan2 {
+  id    Int     @id @default(autoincrement())
+  email String  @unique
+  name  String?
+}
