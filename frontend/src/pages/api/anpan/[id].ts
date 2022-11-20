@@ -15,7 +15,12 @@ export default async function handler(
     // anpan/1 の時も対応させる
     case 'GET':
       try {
-        const anpans = await prisma.anpan.findUnique({ where: { id: id } }) // findUnique, findMany (where(OR, AND), orderBy, select, include, )
+        const anpans = await prisma.anpan.findUnique(
+          {
+            where: {
+              id: id
+            }
+          }) // findUnique, findMany (where(OR, AND), orderBy, select, include, )
         res.status(200).json({ data: anpans, method:method })
     } catch (e) {
         const err = e
@@ -25,8 +30,13 @@ export default async function handler(
     // anpan/1 
     case 'PUT':
       try {
-        const createAnpan = await prisma.anpan.create({
-          data: { email: body.email, name: body.name },
+        const createAnpan = await prisma.anpan.update({
+          where: {
+            id: id
+          },
+          data: {
+            email: body.email, name: body.name // emailだけ、nameだけでも行ける
+          },
         })
         res.status(200).json({data: createAnpan})
       } catch (e) {

@@ -52,6 +52,24 @@ const Home: NextPage = () => {
     }
   }, [])
 
+  const updateAnpan = useCallback(async () => {
+    try {
+      const res = await fetch('/api/anpan/1', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          // email: "emailです", name: "test1 update"
+         name: "test1 update2"
+        })
+      })
+      console.log("更新に成功", res)
+    } catch (e) {
+      console.error(e)
+    }
+  }, [])
+
   return (
     <div className={styles.container}>
       <Head>
@@ -62,6 +80,8 @@ const Home: NextPage = () => {
 
       <main className={styles.main}>
         <button onClick={createAnpan}>あんぱん追加</button>
+        <button onClick={updateAnpan}>あんぱん更新</button>
+        <button onClick={createAnpan}>あんぱん削除</button>
         {JSON.stringify(anpan)}
         
         <ul>
