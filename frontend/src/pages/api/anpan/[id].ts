@@ -43,11 +43,14 @@ export default async function handler(
         const err = e
         res.status(400).json({ data: err })
       }
-      
+
+    // anpan/1 
     case 'DELETE':
       try {
-        const createAnpan = await prisma.anpan.create({
-          data: { email: body.email, name: body.name },
+        const createAnpan = await prisma.anpan.delete({
+          where: {
+            id: id
+          },
         })
         res.status(200).json({data: createAnpan})
       } catch (e) {

@@ -11,7 +11,7 @@ const Home: NextPage = () => {
 
   const getAnpan = useCallback(async () => {
     try {
-      const res = await fetch('/api/anpan/1').then(res => res.json())
+      const res = await fetch('/api/anpan/3').then(res => res.json())
       setAnpan(res.data)
       console.log({ res })
     } catch (e) {
@@ -32,7 +32,6 @@ const Home: NextPage = () => {
   useEffect(() => {
     getAnpan()
     getAnpans()
-
   }, [])
 
   const createAnpan = useCallback(async () => {
@@ -45,7 +44,7 @@ const Home: NextPage = () => {
         body: JSON.stringify({
           email: "email6", name: "aa"
         })
-      })
+      }).then(res => res.json())
       console.log("追加に成功", res)
     } catch (e) {
       console.error(e)
@@ -63,8 +62,19 @@ const Home: NextPage = () => {
           // email: "emailです", name: "test1 update"
          name: "test1 update2"
         })
-      })
+      }).then(res => res.json())
       console.log("更新に成功", res)
+    } catch (e) {
+      console.error(e)
+    }
+  }, [])
+
+  const deleteAnpan = useCallback(async () => {
+    try {
+      const res = await fetch('/api/anpan/2', {
+        method: 'DELETE',
+      }).then(res => res.json())
+      console.log("削除に成功", res)
     } catch (e) {
       console.error(e)
     }
@@ -81,7 +91,7 @@ const Home: NextPage = () => {
       <main className={styles.main}>
         <button onClick={createAnpan}>あんぱん追加</button>
         <button onClick={updateAnpan}>あんぱん更新</button>
-        <button onClick={createAnpan}>あんぱん削除</button>
+        <button onClick={deleteAnpan}>あんぱん削除</button>
         {JSON.stringify(anpan)}
         
         <ul>
